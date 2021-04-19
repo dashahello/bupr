@@ -27,17 +27,7 @@ function randomNumberBetween(min, max) {
 }
 
 const DEFAULT_TIMER_INPUT = 10;
-
-const maxBubbleHeight = (window.innerHeight / 100) * 42.8571428571;
-const minBubbleHeight = (window.innerHeight / 100) * 7.14285714286;
-
-const maxBubbleWidth = (window.innerWidth / 100) * 21.9619326501;
-const minBubbleWidth = (window.innerWidth / 100) * 3.66032210835;
-
-const maxBubbleSize =
-  maxBubbleHeight < maxBubbleWidth ? maxBubbleHeight : maxBubbleWidth;
-const minBubbleSize =
-  minBubbleHeight < minBubbleWidth ? minBubbleHeight : minBubbleWidth;
+const BUBBLE_HOVER_SCALE = 1.1;
 
 const useStyles = makeStyles((theme) => ({
   main: {
@@ -49,37 +39,66 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function App() {
-  // states
-  let [count, setCount] = useState(0);
-  let [color, setColor] = useState(null);
-  let [size, setSize] = useState(null);
-  let [top, setTop] = useState(null);
-  let [left, setLeft] = useState(null);
+  let [count, setCount] = useState(null);
+  const [bubbleStyle, setBubbleStyle] = useState(null);
   const [gameInProgress, setGameInProgress] = useState(false);
-  let [message, setMessege] = useState(
+  let [message, setMessage] = useState(
     'Set up the timer below, press "START THE GAME" and try to pop as many bubbles as possible (remember that every bubble has a lifetime of 1 second so it will disappear unless you click on it). Good luck :)'
   );
-  let [timerInput, setTimerInput] = useState(DEFAULT_TIMER_INPUT);
-  //
-  useEffect(() => {
-    setColor(randomRgbString(250));
-    setSize(randomNumberBetween(maxBubbleSize, minBubbleSize));
-    setTop(randomNumberBetween(size / 2, window.innerWidth - size - size / 2));
-    setLeft(
-      randomNumberBetween(size / 2, window.innerHeight - size - size / 2)
+  const [timerInput, setTimerInput] = useState(DEFAULT_TIMER_INPUT);
+
+  function calculateBubbleStyle() {
+    const onePercentOfAverageScreenDimension =
+      (window.innerWidth + window.innerHeight) / 2 / 100;
+    const smallestScreenDimension =
+      window.innerHeight < window.innerWidth
+        ? window.innerHeight
+        : window.innerWidth;
+
+    const minBubbleSize = onePercentOfAverageScreenDimension * 5;
+    const maxBubbleSize = onePercentOfAverageScreenDimension * 25;
+
+    const color = randomRgbString(250);
+    let size = randomNumberBetween(minBubbleSize, maxBubbleSize);
+
+    if (size * 2 > smallestScreenDimension) {
+      size = smallestScreenDimension / 2;
+    }
+
+    const maxBubbleGrowth = (size * BUBBLE_HOVER_SCALE - size) / 2;
+
+    const top = randomNumberBetween(
+      maxBubbleGrowth,
+      window.innerHeight - size - maxBubbleGrowth
     );
-  }, [count]); // only when count changes useEffect() renders (otherwise it would cause an infinite loop)
-  // styles
-  const bubbleStyle = {
-    background: `${color}`,
-    width: `${size}px`,
-    height: `${size}px`,
-    top: `${top}px`,
-    left: `${left}px`,
-  };
-  // functions
+    const left = randomNumberBetween(
+      maxBubbleGrowth,
+      window.innerWidth - size - maxBubbleGrowth
+    );
+
+    setBubbleStyle({
+      background: `${color}`,
+      width: `${size}px`,
+      height: `${size}px`,
+      top: `${top}px`,
+      left: `${left}px`,
+    });
+  }
+  useEffect(calculateBubbleStyle, [count]);
+
+  useEffect(() => {
+    function onWindowResize() {
+      calculateBubbleStyle();
+    }
+    window.addEventListener('resize', onWindowResize);
+
+    return () => {
+      window.removeEventListener('resize', onWindowResize);
+    };
+  }, []);
 
   function handleButtonClick() {
+    setCount(0);
     const interval = setInterval(() => {
       setTimerInput((currentRemainingTime) => currentRemainingTime - 1);
     }, 1000);
@@ -88,6 +107,7 @@ function App() {
 
     setTimeout(() => {
       setGameInProgress(false);
+      setMessage(count > timerInput ? 'GOOD JOB!' : 'YOU CAN DO BETTER');
       setTimerInput(DEFAULT_TIMER_INPUT);
       clearInterval(interval);
     }, timerInput * 1000);
@@ -146,7 +166,7 @@ function App() {
 
               <Typography>{message}</Typography>
 
-              {count !== 0 ? (
+              {count !== null ? (
                 <>
                   <Divider />
                   <Typography variant="h4">{`YOUR SCORE: ${count}`}</Typography>
@@ -174,11 +194,43 @@ function App() {
               >
                 START THE GAME
               </Button>
+
+              <WaveDemo />
             </Paper>
           </Container>
         </>
       )}
     </ThemeProvider>
+  );
+}
+
+function WaveDemo() {
+  const [x, setX] = useState(0);
+  const [y, setY] = useState(0);
+
+  useEffect(() => {
+    setInterval(() => {
+      setX((Math.sin(Date.now() * 0.00077121) + 1) / 2);
+      setY((Math.cos(Date.now() * 0.00099083) + 1) / 2);
+    }, 1000 / 60);
+  }, []);
+
+  return (
+    <div
+      style={{
+        position: 'fixed',
+        transform: `translate3d(${x * window.innerWidth * 0.9}px, ${
+          y * window.innerHeight * 0.9
+        }px, 0)`,
+        width: 50,
+        height: 50,
+        borderRadius: '100%',
+        top: 0,
+        left: 0,
+        background: '#ba68c8',
+        opacity: '70%',
+      }}
+    ></div>
   );
 }
 
