@@ -47,6 +47,7 @@ function App() {
     'Set up the timer below, press "START THE GAME" and try to pop as many bubbles as possible (remember that every bubble has a lifetime of 1 second so it will disappear unless you click on it). Good luck :)'
   );
   const [timerInput, setTimerInput] = useState(DEFAULT_TIMER_INPUT);
+  const [misclicksEnabled, setMiscklicksEnabled] = useState(false);
 
   function calculateBubbleStyle() {
     const onePercentOfAverageScreenDimension =
@@ -104,11 +105,9 @@ function App() {
         (currentTotalClickCount) => currentTotalClickCount + 1
       );
     }
-    if (gameInProgress) {
+    if (gameInProgress && misclicksEnabled) {
       window.addEventListener('click', getTotalClickCount);
-      return () => {
-        window.removeEventListener('click', getTotalClickCount);
-      };
+      return window.removeEventListener('click', getTotalClickCount);
     }
   });
 
@@ -187,14 +186,26 @@ function App() {
               {bubbleClickCount !== null ? (
                 <>
                   <Divider />
-                  <Typography variant="h4">{`YOUR SCORE: ${
-                    bubbleClickCount - (totalClickCount - bubbleClickCount)
-                  } 
-                  (got bubble: ${bubbleClickCount}, 
-                  miscklicks: ${totalClickCount - bubbleClickCount}, 
-                  total: ${totalClickCount})`}</Typography>
+                  <Typography variant="h4">
+                    {misclicksEnabled
+                      ? `YOUR SCORE: ${bubbleClickCount} 
+                Miscklicks: ${totalClickCount - bubbleClickCount}`
+                      : `YOUR SCORE: ${bubbleClickCount}`}
+                  </Typography>
                 </>
               ) : null}
+              <Divider />
+
+              <input
+                type="checkbox"
+                id="check_miscklicks"
+                checked={misclicksEnabled === true}
+                onChange={() =>
+                  setMiscklicksEnabled(misclicksEnabled ? false : true)
+                }
+              ></input>
+
+              <label htmlFor="check_miscklicks">Miscklicks enabled</label>
 
               <Divider style={{ marginBottom: 8 }} />
 
@@ -218,7 +229,7 @@ function App() {
                 START THE GAME
               </Button>
 
-              {/* <WaveDemo /> */}
+              <WaveDemo />
             </Paper>
           </Container>
         </>
@@ -227,34 +238,34 @@ function App() {
   );
 }
 
-// function WaveDemo() {
-//   const [x, setX] = useState(0);
-//   const [y, setY] = useState(0);
+function WaveDemo() {
+  const [x, setX] = useState(0);
+  const [y, setY] = useState(0);
 
-//   useEffect(() => {
-//     setInterval(() => {
-//       setX((Math.sin(Date.now() * 0.00077121) + 1) / 2);
-//       setY((Math.cos(Date.now() * 0.00099083) + 1) / 2);
-//     }, 1000 / 60);
-//   }, []);
+  useEffect(() => {
+    setInterval(() => {
+      setX((Math.sin(Date.now() * 0.00077121) + 1) / 2);
+      setY((Math.cos(Date.now() * 0.00099083) + 1) / 2);
+    }, 1000 / 60);
+  }, []);
 
-//   return (
-//     <div
-//       style={{
-//         position: 'fixed',
-//         transform: `translate3d(${x * window.innerWidth * 0.9}px, ${
-//           y * window.innerHeight * 0.9
-//         }px, 0)`,
-//         width: 50,
-//         height: 50,
-//         borderRadius: '100%',
-//         top: 0,
-//         left: 0,
-//         background: '#ba68c8',
-//         opacity: '70%',
-//       }}
-//     ></div>
-//   );
-// }
+  return (
+    <div
+      style={{
+        position: 'fixed',
+        transform: `translate3d(${x * window.innerWidth * 0.9}px, ${
+          y * window.innerHeight * 0.9
+        }px, 0)`,
+        width: 50,
+        height: 50,
+        borderRadius: '100%',
+        top: 0,
+        left: 0,
+        background: '#ba68c8',
+        opacity: '70%',
+      }}
+    ></div>
+  );
+}
 
 export default App;
