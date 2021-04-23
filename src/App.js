@@ -101,17 +101,21 @@ function App() {
 
   useEffect(() => {
     function getTotalClickCount() {
+      console.log(totalClickCount);
       setTotalClickCount(
         (currentTotalClickCount) => currentTotalClickCount + 1
       );
     }
     if (gameInProgress && misclicksEnabled) {
       window.addEventListener('click', getTotalClickCount);
-      return window.removeEventListener('click', getTotalClickCount);
+      return () => {
+        window.removeEventListener('click', getTotalClickCount);
+      };
     }
   });
 
   function handleButtonClick() {
+    console.log(misclicksEnabled);
     setBubbleClickCount(0);
     setTotalClickCount(0);
     const interval = setInterval(() => {
@@ -188,7 +192,10 @@ function App() {
                   <Divider />
                   <Typography variant="h4">
                     {misclicksEnabled
-                      ? `YOUR SCORE: ${bubbleClickCount} 
+                      ? `YOUR SCORE: ${
+                          bubbleClickCount -
+                          (totalClickCount - bubbleClickCount)
+                        } 
                 Miscklicks: ${totalClickCount - bubbleClickCount}`
                       : `YOUR SCORE: ${bubbleClickCount}`}
                   </Typography>
