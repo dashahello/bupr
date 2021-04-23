@@ -15,7 +15,9 @@ import React, { useEffect, useState } from 'react';
 import './index.css';
 import themes from './themes';
 import useIsTablet from './useIsTablet';
-
+//
+import audio from './assets/audio.wav';
+//
 function randomRgbString(maxChannelValue) {
   return `rgb( ${Math.random() * maxChannelValue}, ${
     Math.random() * maxChannelValue
@@ -39,6 +41,10 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function App() {
+  const playAudio = () => {
+    new Audio(audio).play();
+  };
+
   const [bubbleClickCount, setBubbleClickCount] = useState(null);
   const [totalClickCount, setTotalClickCount] = useState(0);
   const [bubbleStyle, setBubbleStyle] = useState(null);
@@ -133,6 +139,7 @@ function App() {
   }
 
   function onBubbleClick() {
+    playAudio();
     setBubbleClickCount((currentCount) => currentCount + 1);
   }
 
@@ -201,16 +208,18 @@ function App() {
               ) : null}
               <Divider />
 
-              <input
-                type="checkbox"
-                id="check_miscklicks"
-                checked={misclicksEnabled === true}
-                onChange={() =>
-                  setMiscklicksEnabled(misclicksEnabled ? false : true)
+              <FormControlLabel
+                control={
+                  <Switch
+                    checked={misclicksEnabled === true}
+                    onChange={() =>
+                      setMiscklicksEnabled(misclicksEnabled ? false : true)
+                    }
+                    name="checkedB"
+                  />
                 }
-              ></input>
-
-              <label htmlFor="check_miscklicks">Miscklicks enabled</label>
+                label="Miscklicks enabled"
+              />
 
               <Divider style={{ marginBottom: 8 }} />
 
