@@ -101,7 +101,6 @@ function App() {
 
   useEffect(() => {
     function getTotalClickCount() {
-      console.log(totalClickCount);
       setTotalClickCount(
         (currentTotalClickCount) => currentTotalClickCount + 1
       );
@@ -115,7 +114,6 @@ function App() {
   });
 
   function handleButtonClick() {
-    console.log(misclicksEnabled);
     setBubbleClickCount(0);
     setTotalClickCount(0);
     const interval = setInterval(() => {
