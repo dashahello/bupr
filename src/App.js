@@ -8,102 +8,51 @@ import {
   Switch,
   TextField,
   ThemeProvider,
-  Typography,
-  useTheme,
+  Typography
 } from '@material-ui/core';
 import React, { useEffect, useState } from 'react';
 import './index.css';
 import themes from './themes';
-import useIsTablet from './useIsTablet';
 //
-import audio from './assets/audio.wav';
-//
-function randomRgbString(maxChannelValue) {
-  return `rgb( ${Math.random() * maxChannelValue}, ${
-    Math.random() * maxChannelValue
-  }, ${Math.random() * maxChannelValue})`;
-}
 
-function randomNumberBetween(min, max) {
-  return Math.random() * (max - min) + min;
-}
+import ThemeSwitch from './Components/ThemeSwitch';
+import InGame from './Components/InGame';
+//
 
 const DEFAULT_TIMER_INPUT = 10;
-const BUBBLE_HOVER_SCALE = 1.1;
 
 const useStyles = makeStyles((theme) => ({
   main: {
     display: 'flex',
     flexDirection: 'column',
     padding: 8,
-    marginTop: 16,
-  },
+    marginTop: 16
+  }
 }));
 
 function App() {
-  const playAudio = () => {
-    new Audio(audio).play();
-  };
+  const classes = useStyles();
 
   const [bubbleClickCount, setBubbleClickCount] = useState(null);
   const [totalClickCount, setTotalClickCount] = useState(0);
-  const [bubbleStyle, setBubbleStyle] = useState(null);
+  const [score, setScore] = useState(0);
+
   const [gameInProgress, setGameInProgress] = useState(false);
   const [message, setMessage] = useState(
     'Set up the timer below, press "START THE GAME" and try to pop as many bubbles as possible (remember that every bubble has a lifetime of 1 second so it will disappear unless you click on it). Good luck :)'
   );
   const [timerInput, setTimerInput] = useState(DEFAULT_TIMER_INPUT);
-  const [misclicksEnabled, setMiscklicksEnabled] = useState(false);
+  const [miscklicksEnabled, setMiscklicksEnabled] = useState(false);
 
-  function calculateBubbleStyle() {
-    const onePercentOfAverageScreenDimension =
-      (window.innerWidth + window.innerHeight) / 2 / 100;
-    const smallestScreenDimension =
-      window.innerHeight < window.innerWidth
-        ? window.innerHeight
-        : window.innerWidth;
-
-    const minBubbleSize = onePercentOfAverageScreenDimension * 5;
-    const maxBubbleSize = onePercentOfAverageScreenDimension * 25;
-
-    const color = randomRgbString(250);
-    let size = randomNumberBetween(minBubbleSize, maxBubbleSize);
-
-    if (size * 2 > smallestScreenDimension) {
-      size = smallestScreenDimension / 2;
+  function getScore() {
+    if (miscklicksEnabled) {
+      setScore(bubbleClickCount - (totalClickCount - bubbleClickCount));
+    } else {
+      setScore(bubbleClickCount);
     }
-
-    const maxBubbleGrowth = (size * BUBBLE_HOVER_SCALE - size) / 2;
-
-    const top = randomNumberBetween(
-      maxBubbleGrowth,
-      window.innerHeight - size - maxBubbleGrowth
-    );
-    const left = randomNumberBetween(
-      maxBubbleGrowth,
-      window.innerWidth - size - maxBubbleGrowth
-    );
-
-    setBubbleStyle({
-      background: `${color}`,
-      width: `${size}px`,
-      height: `${size}px`,
-      top: `${top}px`,
-      left: `${left}px`,
-    });
   }
-  useEffect(calculateBubbleStyle, [bubbleClickCount]);
 
-  useEffect(() => {
-    function onWindowResize() {
-      calculateBubbleStyle();
-    }
-    window.addEventListener('resize', onWindowResize);
-
-    return () => {
-      window.removeEventListener('resize', onWindowResize);
-    };
-  });
+  useEffect(getScore, [gameInProgress]);
 
   useEffect(() => {
     function getTotalClickCount() {
@@ -111,7 +60,7 @@ function App() {
         (currentTotalClickCount) => currentTotalClickCount + 1
       );
     }
-    if (gameInProgress && misclicksEnabled) {
+    if (gameInProgress && miscklicksEnabled) {
       window.addEventListener('click', getTotalClickCount);
       return () => {
         window.removeEventListener('click', getTotalClickCount);
@@ -138,112 +87,45 @@ function App() {
     }, timerInput * 1000);
   }
 
-  function onBubbleClick() {
-    playAudio();
-    setBubbleClickCount((currentCount) => currentCount + 1);
-  }
-
-  const classes = useStyles();
-
-  const isTablet = useIsTablet();
+  // const isTablet = useIsTablet();
 
   const [themeToUse, setThemeToUse] = useState(
     localStorage.getItem('themeToUse')
   );
 
-  useEffect(() => {
-    document.body.style.backgroundColor =
-      themeToUse === 'dark' ? 'black' : 'white';
-  }, [themeToUse]);
-
   return (
     <ThemeProvider theme={themes[themeToUse]}>
       {gameInProgress ? (
-        <>
-          <Container maxWidth="xs">
-            <Paper>
-              <Typography>{`REMAINING TIME: ${timerInput}`}</Typography>
-            </Paper>
-          </Container>
-
-          <div id="bubble" style={bubbleStyle} onClick={onBubbleClick}></div>
-        </>
+        <InGame
+          timerInput={timerInput}
+          bubbleClickCount={bubbleClickCount}
+          setBubbleClickCount={setBubbleClickCount}
+        />
       ) : (
         <>
           <Container maxWidth="xs">
             <Paper className={classes.main}>
               <Typography variant="h1">BUPR</Typography>
               <Divider />
-              <FormControlLabel
-                control={
-                  <Switch
-                    checked={themeToUse === 'dark'}
-                    onChange={(evt) => {
-                      const themeToSet = evt.target.checked ? 'dark' : 'light';
-                      setThemeToUse(themeToSet);
-                      localStorage.setItem('themeToUse', themeToSet);
-                    }}
-                    name="checkedA"
-                  />
-                }
-                label="Dark theme"
+              <ThemeSwitch
+                themeToUse={themeToUse}
+                setThemeToUse={setThemeToUse}
               />
               <Divider />
-
               <Typography>{message}</Typography>
-
-              {bubbleClickCount !== null ? (
-                <>
-                  <Divider />
-                  <Typography variant="h4">
-                    {misclicksEnabled
-                      ? `YOUR SCORE: ${
-                          bubbleClickCount -
-                          (totalClickCount - bubbleClickCount)
-                        } 
-                Miscklicks: ${totalClickCount - bubbleClickCount}`
-                      : `YOUR SCORE: ${bubbleClickCount}`}
-                  </Typography>
-                </>
-              ) : null}
+              {/* <DisplayScore /> */}
               <Divider />
-
-              <FormControlLabel
-                control={
-                  <Switch
-                    checked={misclicksEnabled === true}
-                    onChange={() =>
-                      setMiscklicksEnabled(misclicksEnabled ? false : true)
-                    }
-                    name="checkedB"
-                  />
-                }
-                label="Miscklicks enabled"
+              <MiscklicksSwitch
+                miscklicksEnabled={miscklicksEnabled}
+                setMiscklicksEnabled={setMiscklicksEnabled}
               />
-
               <Divider style={{ marginBottom: 8 }} />
-
-              <TextField
-                type="number"
-                label="Timer (seconds)"
-                variant="outlined"
-                onChange={(evt) => {
-                  const input = parseInt(evt.target.value);
-                  setTimerInput(input);
-                }}
-                value={timerInput}
+              <CustomTimer
+                timerInput={timerInput}
+                setTimerInput={setTimerInput}
               />
-
-              <Button
-                style={{ marginTop: 8 }}
-                onClick={handleButtonClick}
-                variant="contained"
-                color="primary"
-              >
-                START THE GAME
-              </Button>
-
-              <WaveDemo />
+              <StartButton handleButtonClick={handleButtonClick} />
+              <WaveDemo bubbleClickCount={bubbleClickCount} />
             </Paper>
           </Container>
         </>
@@ -252,7 +134,60 @@ function App() {
   );
 }
 
-function WaveDemo() {
+function DisplayScore({ bubbleClickCount, score }) {
+  return bubbleClickCount !== null ? (
+    <>
+      <Divider />
+      <Typography variant="h4">{`YOUR SCORE: ${score}`}</Typography>
+    </>
+  ) : null;
+}
+
+function MiscklicksSwitch({ setMiscklicksEnabled, miscklicksEnabled }) {
+  return (
+    <FormControlLabel
+      control={
+        <Switch
+          checked={miscklicksEnabled === true}
+          onChange={() =>
+            setMiscklicksEnabled(miscklicksEnabled ? false : true)
+          }
+          name="checkedB"
+        />
+      }
+      label="Miscklicks enabled"
+    />
+  );
+}
+
+function CustomTimer({ setTimerInput, timerInput }) {
+  return (
+    <TextField
+      type="number"
+      label="Timer (seconds)"
+      variant="outlined"
+      onChange={(evt) => {
+        const input = parseInt(evt.target.value);
+        setTimerInput(input);
+      }}
+      value={timerInput}
+    />
+  );
+}
+
+function StartButton({ handleButtonClick }) {
+  return (
+    <Button
+      style={{ marginTop: 8 }}
+      onClick={handleButtonClick}
+      variant="contained"
+      color="primary"
+    >
+      START THE GAME
+    </Button>
+  );
+}
+function WaveDemo({ bubbleClickCount }) {
   const [x, setX] = useState(0);
   const [y, setY] = useState(0);
 
@@ -276,9 +211,13 @@ function WaveDemo() {
         top: 0,
         left: 0,
         background: '#ba68c8',
-        opacity: '70%',
+        opacity: '70%'
       }}
-    ></div>
+    >
+      <Typography style={{ textAlign: 'center', fontWeight: 'bold' }}>
+        {bubbleClickCount}
+      </Typography>
+    </div>
   );
 }
 
