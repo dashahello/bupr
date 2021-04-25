@@ -19,7 +19,7 @@ import ThemeSwitch from './Components/ThemeSwitch';
 import InGame from './Components/InGame';
 //
 
-const DEFAULT_TIMER_INPUT = 10;
+const DEFAULT_TIMER_INPUT = 5;
 
 const useStyles = makeStyles((theme) => ({
   main: {
@@ -44,15 +44,13 @@ function App() {
   const [timerInput, setTimerInput] = useState(DEFAULT_TIMER_INPUT);
   const [miscklicksEnabled, setMiscklicksEnabled] = useState(false);
 
-  function getScore() {
+  useEffect(() => {
     if (miscklicksEnabled) {
       setScore(bubbleClickCount - (totalClickCount - bubbleClickCount));
     } else {
       setScore(bubbleClickCount);
     }
-  }
-
-  useEffect(getScore, [gameInProgress]);
+  }, [gameInProgress]);
 
   useEffect(() => {
     function getTotalClickCount() {
@@ -113,7 +111,9 @@ function App() {
               />
               <Divider />
               <Typography>{message}</Typography>
-              {/* <DisplayScore /> */}
+
+              <DisplayScore bubbleClickCount={bubbleClickCount} score={score} />
+
               <Divider />
               <MiscklicksSwitch
                 miscklicksEnabled={miscklicksEnabled}
