@@ -36,6 +36,7 @@ function App() {
   const [bubbleClickCount, setBubbleClickCount] = useState(null);
   const [totalClickCount, setTotalClickCount] = useState(0);
   const [score, setScore] = useState(0);
+  const [miscklicks, setMiscklicks] = useState(0);
 
   const [gameInProgress, setGameInProgress] = useState(false);
   const [message, setMessage] = useState(
@@ -47,6 +48,7 @@ function App() {
   useEffect(() => {
     if (miscklicksEnabled) {
       setScore(bubbleClickCount - (totalClickCount - bubbleClickCount));
+      setMiscklicks(totalClickCount - bubbleClickCount);
     } else {
       setScore(bubbleClickCount);
     }
@@ -112,7 +114,16 @@ function App() {
               <Divider />
               <Typography>{message}</Typography>
 
-              <DisplayScore bubbleClickCount={bubbleClickCount} score={score} />
+              <DisplayScore
+                bubbleClickCount={bubbleClickCount}
+                score={score}
+                miscklicks={miscklicks}
+              />
+
+              <DisplayMiscklicks
+                miscklicksEnabled={miscklicksEnabled}
+                miscklicks={miscklicks}
+              />
 
               <Divider />
               <MiscklicksSwitch
@@ -134,12 +145,18 @@ function App() {
   );
 }
 
-function DisplayScore({ bubbleClickCount, score }) {
+function DisplayScore({ bubbleClickCount, score, miscklicks }) {
   return bubbleClickCount !== null ? (
     <>
       <Divider />
       <Typography variant="h4">{`YOUR SCORE: ${score}`}</Typography>
     </>
+  ) : null;
+}
+
+function DisplayMiscklicks({ miscklicksEnabled, miscklicks }) {
+  return miscklicksEnabled ? (
+    <Typography variant="h5">{`Misclicks: ${miscklicks}`}</Typography>
   ) : null;
 }
 
