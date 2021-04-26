@@ -24,12 +24,13 @@ function App() {
   const [bubbleClickCount, setBubbleClickCount] = useState(null);
   const [totalClickCount, setTotalClickCount] = useState(0);
   const [score, setScore] = useState(0);
-  const [miscklicks, setMiscklicks] = useState(0);
+  const [miscklicks, setMiscklicks] = useState(null);
 
   const [gameInProgress, setGameInProgress] = useState(false);
   const [message, setMessage] = useState(
     'Set up the timer below, press "START THE GAME" and try to pop as many bubbles as possible (remember that every bubble has a lifetime of 1 second so it will disappear unless you click on it). Good luck :)'
   );
+
   const [timerInput, setTimerInput] = useState(DEFAULT_TIMER_INPUT);
   const [miscklicksEnabled, setMiscklicksEnabled] = useState(false);
 
@@ -59,6 +60,7 @@ function App() {
   function handleButtonClick() {
     setBubbleClickCount(0);
     setTotalClickCount(0);
+    setMiscklicks(null);
     const interval = setInterval(() => {
       setTimerInput((currentRemainingTime) => currentRemainingTime - 1);
     }, 1000);
@@ -70,6 +72,7 @@ function App() {
       setMessage(
         bubbleClickCount > timerInput ? 'GOOD JOB!' : 'YOU CAN DO BETTER'
       );
+
       setTimerInput(DEFAULT_TIMER_INPUT);
       clearInterval(interval);
     }, timerInput * 1000);
