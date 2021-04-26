@@ -1,22 +1,10 @@
-import {
-  Button,
-  Container,
-  Divider,
-  FormControlLabel,
-  makeStyles,
-  Paper,
-  Switch,
-  TextField,
-  ThemeProvider,
-  Typography
-} from '@material-ui/core';
+import { Container, makeStyles, Paper, ThemeProvider } from '@material-ui/core';
 import React, { useEffect, useState } from 'react';
 import './index.css';
 import themes from './themes';
 //
-
-import ThemeSwitch from './Components/ThemeSwitch';
 import InGame from './Components/InGame';
+import OutOfGame from './Components/OutOfGame';
 //
 
 const DEFAULT_TIMER_INPUT = 5;
@@ -105,136 +93,24 @@ function App() {
         <>
           <Container maxWidth="xs">
             <Paper className={classes.main}>
-              <Typography variant="h1">BUPR</Typography>
-              <Divider />
-              <ThemeSwitch
-                themeToUse={themeToUse}
-                setThemeToUse={setThemeToUse}
-              />
-              <Divider />
-              <Typography>{message}</Typography>
-
-              <DisplayScore
+              <OutOfGame
                 bubbleClickCount={bubbleClickCount}
                 score={score}
-                miscklicks={miscklicks}
-              />
-
-              <DisplayMiscklicks
+                themeToUse={themeToUse}
+                setThemeToUse={setThemeToUse}
+                message={message}
                 miscklicksEnabled={miscklicksEnabled}
                 miscklicks={miscklicks}
-              />
-
-              <Divider />
-              <MiscklicksSwitch
-                miscklicksEnabled={miscklicksEnabled}
                 setMiscklicksEnabled={setMiscklicksEnabled}
-              />
-              <Divider style={{ marginBottom: 8 }} />
-              <CustomTimer
-                timerInput={timerInput}
                 setTimerInput={setTimerInput}
+                timerInput={timerInput}
+                handleButtonClick={handleButtonClick}
               />
-              <StartButton handleButtonClick={handleButtonClick} />
-              <WaveDemo bubbleClickCount={bubbleClickCount} />
             </Paper>
           </Container>
         </>
       )}
     </ThemeProvider>
-  );
-}
-
-function DisplayScore({ bubbleClickCount, score, miscklicks }) {
-  return bubbleClickCount !== null ? (
-    <>
-      <Divider />
-      <Typography variant="h4">{`YOUR SCORE: ${score}`}</Typography>
-    </>
-  ) : null;
-}
-
-function DisplayMiscklicks({ miscklicksEnabled, miscklicks }) {
-  return miscklicksEnabled ? (
-    <Typography variant="h5">{`Misclicks: ${miscklicks}`}</Typography>
-  ) : null;
-}
-
-function MiscklicksSwitch({ setMiscklicksEnabled, miscklicksEnabled }) {
-  return (
-    <FormControlLabel
-      control={
-        <Switch
-          checked={miscklicksEnabled === true}
-          onChange={() =>
-            setMiscklicksEnabled(miscklicksEnabled ? false : true)
-          }
-          name="checkedB"
-        />
-      }
-      label="Miscklicks enabled"
-    />
-  );
-}
-
-function CustomTimer({ setTimerInput, timerInput }) {
-  return (
-    <TextField
-      type="number"
-      label="Timer (seconds)"
-      variant="outlined"
-      onChange={(evt) => {
-        const input = parseInt(evt.target.value);
-        setTimerInput(input);
-      }}
-      value={timerInput}
-    />
-  );
-}
-
-function StartButton({ handleButtonClick }) {
-  return (
-    <Button
-      style={{ marginTop: 8 }}
-      onClick={handleButtonClick}
-      variant="contained"
-      color="primary"
-    >
-      START THE GAME
-    </Button>
-  );
-}
-function WaveDemo({ bubbleClickCount }) {
-  const [x, setX] = useState(0);
-  const [y, setY] = useState(0);
-
-  useEffect(() => {
-    setInterval(() => {
-      setX((Math.sin(Date.now() * 0.00077121) + 1) / 2);
-      setY((Math.cos(Date.now() * 0.00099083) + 1) / 2);
-    }, 1000 / 60);
-  }, []);
-
-  return (
-    <div
-      style={{
-        position: 'fixed',
-        transform: `translate3d(${x * window.innerWidth * 0.9}px, ${
-          y * window.innerHeight * 0.9
-        }px, 0)`,
-        width: 50,
-        height: 50,
-        borderRadius: '100%',
-        top: 0,
-        left: 0,
-        background: '#ba68c8',
-        opacity: '70%'
-      }}
-    >
-      <Typography style={{ textAlign: 'center', fontWeight: 'bold' }}>
-        {bubbleClickCount}
-      </Typography>
-    </div>
   );
 }
 
