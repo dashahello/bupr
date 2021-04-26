@@ -1,3 +1,4 @@
+import { lazy, Suspense } from 'react';
 import CustomTimer from './CustomTimer';
 import DisplayMessage from './DisplayMessage';
 import DisplayMiscklicks from './DisplayMiscklicks';
@@ -6,7 +7,8 @@ import DisplayTitle from './DisplayTitle';
 import MiscklicksSwitch from './MiscklicksSwitch';
 import StartButton from './StartButton';
 import ThemeSwitch from './ThemeSwitch';
-import WaveDemo from './WaveDemo';
+
+const WaveDemo = lazy(() => import('./WaveDemo'));
 
 export default function OutOfGame({
   bubbleClickCount,
@@ -37,7 +39,9 @@ export default function OutOfGame({
       />
       <CustomTimer setTimerInput={setTimerInput} timerInput={timerInput} />
       <StartButton handleButtonClick={handleButtonClick} />
-      <WaveDemo bubbleClickCount={bubbleClickCount} />
+      <Suspense fallback={null}>
+        <WaveDemo bubbleClickCount={bubbleClickCount} />
+      </Suspense>
     </>
   );
 }

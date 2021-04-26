@@ -1,13 +1,20 @@
-import { Container, makeStyles, Paper, ThemeProvider } from '@material-ui/core';
-import React, { useEffect, useState } from 'react';
+import {
+  CircularProgress,
+  Container,
+  makeStyles,
+  Paper,
+  ThemeProvider
+} from '@material-ui/core';
+import React, { lazy, Suspense, useEffect, useState } from 'react';
 import './index.css';
 import themes from './themes';
 //
-import InGame from './Components/InGame';
+// import InGame from './Components/InGame';
 import OutOfGame from './Components/OutOfGame';
+import DEFAULT_TIMER_INPUT from './DEFAULT_TIMER_INPUT';
 //
 
-const DEFAULT_TIMER_INPUT = 5;
+const InGame = lazy(() => import('./Components/InGame'));
 
 const useStyles = makeStyles((theme) => ({
   main: {
@@ -61,21 +68,7 @@ function App() {
     setBubbleClickCount(0);
     setTotalClickCount(0);
     setMiscklicks(null);
-    const interval = setInterval(() => {
-      setTimerInput((currentRemainingTime) => currentRemainingTime - 1);
-    }, 1000);
-
     setGameInProgress(true);
-
-    setTimeout(() => {
-      setGameInProgress(false);
-      setMessage(
-        bubbleClickCount > timerInput ? 'GOOD JOB!' : 'YOU CAN DO BETTER'
-      );
-
-      setTimerInput(DEFAULT_TIMER_INPUT);
-      clearInterval(interval);
-    }, timerInput * 1000);
   }
 
   // const isTablet = useIsTablet();
@@ -87,11 +80,16 @@ function App() {
   return (
     <ThemeProvider theme={themes[themeToUse]}>
       {gameInProgress ? (
-        <InGame
-          timerInput={timerInput}
-          bubbleClickCount={bubbleClickCount}
-          setBubbleClickCount={setBubbleClickCount}
-        />
+        <Suspense fallback={<CircularProgress />}>
+          <InGame
+            timerInput={timerInput}
+            bubbleClickCount={bubbleClickCount}
+            setBubbleClickCount={setBubbleClickCount}
+            setTimerInput={setTimerInput}
+            setGameInProgress={setGameInProgress}
+            setMessage={setMessage}
+          />
+        </Suspense>
       ) : (
         <>
           <Container maxWidth="xs">
