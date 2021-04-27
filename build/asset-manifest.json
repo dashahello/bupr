@@ -1,27 +1,25 @@
 {
   "files": {
     "main.css": "/bupr/build/static/css/main.63d3baca.chunk.css",
-    "main.js": "/bupr/build/static/js/main.07f4a2a6.chunk.js",
-    "main.js.map": "/bupr/build/static/js/main.07f4a2a6.chunk.js.map",
-    "runtime-main.js": "/bupr/build/static/js/runtime-main.45b14bd8.js",
-    "runtime-main.js.map": "/bupr/build/static/js/runtime-main.45b14bd8.js.map",
-    "static/js/2.8b8e8148.chunk.js": "/bupr/build/static/js/2.8b8e8148.chunk.js",
-    "static/js/2.8b8e8148.chunk.js.map": "/bupr/build/static/js/2.8b8e8148.chunk.js.map",
-    "static/js/3.e42807c5.chunk.js": "/bupr/build/static/js/3.e42807c5.chunk.js",
-    "static/js/3.e42807c5.chunk.js.map": "/bupr/build/static/js/3.e42807c5.chunk.js.map",
-    "static/js/4.6dee7400.chunk.js": "/bupr/build/static/js/4.6dee7400.chunk.js",
-    "static/js/4.6dee7400.chunk.js.map": "/bupr/build/static/js/4.6dee7400.chunk.js.map",
+    "main.js": "/bupr/build/static/js/main.143cbe9f.chunk.js",
+    "main.js.map": "/bupr/build/static/js/main.143cbe9f.chunk.js.map",
+    "runtime-main.js": "/bupr/build/static/js/runtime-main.faee80ce.js",
+    "runtime-main.js.map": "/bupr/build/static/js/runtime-main.faee80ce.js.map",
+    "static/js/2.5873dfa8.chunk.js": "/bupr/build/static/js/2.5873dfa8.chunk.js",
+    "static/js/2.5873dfa8.chunk.js.map": "/bupr/build/static/js/2.5873dfa8.chunk.js.map",
+    "static/js/3.0deecc73.chunk.js": "/bupr/build/static/js/3.0deecc73.chunk.js",
+    "static/js/3.0deecc73.chunk.js.map": "/bupr/build/static/js/3.0deecc73.chunk.js.map",
     "index.html": "/bupr/build/index.html",
     "service-worker.js": "/bupr/build/service-worker.js",
     "service-worker.js.map": "/bupr/build/service-worker.js.map",
     "static/css/main.63d3baca.chunk.css.map": "/bupr/build/static/css/main.63d3baca.chunk.css.map",
-    "static/js/2.8b8e8148.chunk.js.LICENSE.txt": "/bupr/build/static/js/2.8b8e8148.chunk.js.LICENSE.txt",
+    "static/js/2.5873dfa8.chunk.js.LICENSE.txt": "/bupr/build/static/js/2.5873dfa8.chunk.js.LICENSE.txt",
     "static/media/audio.80f01a1b.wav": "/bupr/build/static/media/audio.80f01a1b.wav"
   },
   "entrypoints": [
-    "static/js/runtime-main.45b14bd8.js",
-    "static/js/2.8b8e8148.chunk.js",
+    "static/js/runtime-main.faee80ce.js",
+    "static/js/2.5873dfa8.chunk.js",
     "static/css/main.63d3baca.chunk.css",
-    "static/js/main.07f4a2a6.chunk.js"
+    "static/js/main.143cbe9f.chunk.js"
   ]
 }
