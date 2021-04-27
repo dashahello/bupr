@@ -23,6 +23,7 @@ code {
 } */
 
 #bubble {
+  outline: none;
   position: fixed;
   border-radius: 100%;
   cursor: pointer;
