@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.css": "/bupr/build/static/css/main.63d3baca.chunk.css",
+    "main.css": "/bupr/build/static/css/main.432634c8.chunk.css",
     "main.js": "/bupr/build/static/js/main.143cbe9f.chunk.js",
     "main.js.map": "/bupr/build/static/js/main.143cbe9f.chunk.js.map",
     "runtime-main.js": "/bupr/build/static/js/runtime-main.faee80ce.js",
@@ -12,14 +12,14 @@
     "index.html": "/bupr/build/index.html",
     "service-worker.js": "/bupr/build/service-worker.js",
     "service-worker.js.map": "/bupr/build/service-worker.js.map",
-    "static/css/main.63d3baca.chunk.css.map": "/bupr/build/static/css/main.63d3baca.chunk.css.map",
+    "static/css/main.432634c8.chunk.css.map": "/bupr/build/static/css/main.432634c8.chunk.css.map",
     "static/js/2.5873dfa8.chunk.js.LICENSE.txt": "/bupr/build/static/js/2.5873dfa8.chunk.js.LICENSE.txt",
     "static/media/audio.80f01a1b.wav": "/bupr/build/static/media/audio.80f01a1b.wav"
   },
   "entrypoints": [
     "static/js/runtime-main.faee80ce.js",
     "static/js/2.5873dfa8.chunk.js",
-    "static/css/main.63d3baca.chunk.css",
+    "static/css/main.432634c8.chunk.css",
     "static/js/main.143cbe9f.chunk.js"
   ]
 }
