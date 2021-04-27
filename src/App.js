@@ -16,18 +16,7 @@ import DEFAULT_TIMER_INPUT from './DEFAULT_TIMER_INPUT';
 
 const InGame = lazy(() => import('./Components/InGame'));
 
-const useStyles = makeStyles((theme) => ({
-  main: {
-    display: 'flex',
-    flexDirection: 'column',
-    padding: 8,
-    marginTop: 16
-  }
-}));
-
 function App() {
-  const classes = useStyles();
-
   const [bubbleClickCount, setBubbleClickCount] = useState(null);
   const [totalClickCount, setTotalClickCount] = useState(0);
   const [score, setScore] = useState(0);
@@ -92,23 +81,19 @@ function App() {
         </Suspense>
       ) : (
         <>
-          <Container maxWidth="xs">
-            <Paper className={classes.main}>
-              <OutOfGame
-                bubbleClickCount={bubbleClickCount}
-                score={score}
-                themeToUse={themeToUse}
-                setThemeToUse={setThemeToUse}
-                message={message}
-                miscklicksEnabled={miscklicksEnabled}
-                miscklicks={miscklicks}
-                setMiscklicksEnabled={setMiscklicksEnabled}
-                setTimerInput={setTimerInput}
-                timerInput={timerInput}
-                handleButtonClick={handleButtonClick}
-              />
-            </Paper>
-          </Container>
+          <OutOfGame
+            bubbleClickCount={bubbleClickCount}
+            score={score}
+            themeToUse={themeToUse}
+            setThemeToUse={setThemeToUse}
+            message={message}
+            miscklicksEnabled={miscklicksEnabled}
+            miscklicks={miscklicks}
+            setMiscklicksEnabled={setMiscklicksEnabled}
+            setTimerInput={setTimerInput}
+            timerInput={timerInput}
+            handleButtonClick={handleButtonClick}
+          />
         </>
       )}
     </ThemeProvider>

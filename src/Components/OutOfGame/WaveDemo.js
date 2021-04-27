@@ -1,14 +1,17 @@
 import { Typography } from '@material-ui/core';
 import { useEffect, useState } from 'react';
 
-export default function WaveDemo({ bubbleClickCount }) {
+export default function WaveDemo({
+  dateMultipliers: { x: xMod, y: yMod },
+  color
+}) {
   const [x, setX] = useState(0);
   const [y, setY] = useState(0);
 
   useEffect(() => {
     setInterval(() => {
-      setX((Math.sin(Date.now() * 0.00077121) + 1) / 2);
-      setY((Math.cos(Date.now() * 0.00099083) + 1) / 2);
+      setX((Math.sin(Date.now() * xMod) + 1) / 2);
+      setY((Math.cos(Date.now() * yMod) + 1) / 2);
     }, 1000 / 60);
   }, []);
 
@@ -24,13 +27,10 @@ export default function WaveDemo({ bubbleClickCount }) {
         borderRadius: '100%',
         top: 0,
         left: 0,
-        background: '#ba68c8',
-        opacity: '70%'
+        background: color,
+        opacity: '70%',
+        zIndex: -1
       }}
-    >
-      <Typography style={{ textAlign: 'center', fontWeight: 'bold' }}>
-        {bubbleClickCount}
-      </Typography>
-    </div>
+    />
   );
 }
