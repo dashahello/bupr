@@ -1,1 +1,3 @@
-export default 5;
+const DEFAULT_TIMER_INPUT = 5;
+
+export default DEFAULT_TIMER_INPUT;

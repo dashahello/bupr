@@ -1,5 +1,5 @@
 import { Container, makeStyles, Paper } from '@material-ui/core';
-import { lazy, Suspense } from 'react';
+import { useEffect, useState } from 'react';
 import randomNumberBetween from '../../helpers/randomNumberBetween';
 import randomRgbString from '../../helpers/randomRgbString';
 import CustomTimer from './CustomTimer';
@@ -37,19 +37,29 @@ export default function OutOfGame({
 }) {
   const classes = useStyles();
 
+  const [waveDemoProps, setWaveDemoProps] = useState(null);
+
+  useEffect(() => {
+    const _waveDemoProps = [];
+
+    for (let i = 0; i < 5; i++) {
+      _waveDemoProps.push({
+        dateMultipliers: {
+          x: randomNumberBetween(0.0003, 0.001),
+          y: randomNumberBetween(0.0003, 0.001)
+        },
+        color: randomRgbString(250)
+      });
+    }
+
+    setWaveDemoProps(_waveDemoProps);
+  }, []);
+
   return (
     <Container maxWidth="xs">
-      {Array(5)
-        .fill(null)
-        .map((_, i) => (
-          <WaveDemo
-            dateMultipliers={{
-              x: randomNumberBetween(0.0003, 0.001),
-              y: randomNumberBetween(0.0003, 0.001)
-            }}
-            color={randomRgbString(250)}
-          />
-        ))}
+      {waveDemoProps
+        ? waveDemoProps.map((props, i) => <WaveDemo key={i} {...props} />)
+        : null}
 
       <Paper className={classes.main}>
         <DisplayTitle />

@@ -1,4 +1,3 @@
-import { Typography } from '@material-ui/core';
 import { useEffect, useState } from 'react';
 
 export default function WaveDemo({
@@ -9,11 +8,13 @@ export default function WaveDemo({
   const [y, setY] = useState(0);
 
   useEffect(() => {
-    setInterval(() => {
+    const interval = setInterval(() => {
       setX((Math.sin(Date.now() * xMod) + 1) / 2);
       setY((Math.cos(Date.now() * yMod) + 1) / 2);
     }, 1000 / 60);
-  }, []);
+
+    return () => clearInterval(interval);
+  }, []); // eslint-disable-line
 
   return (
     <div

@@ -5,12 +5,16 @@ import randomRgbString from '../../helpers/randomRgbString';
 
 const BUBBLE_HOVER_SCALE = 1.1;
 
+// const AUDIO = document.getElementById('bubble_pop_sound');
 const AUDIO = new Audio(audio);
 
+const BUBBLE_ID = 'bubble';
+let BUBBLE_TIMEOUT;
+
 export default function Bubble({
-  onBubbleClick,
   bubbleClickCount,
-  setBubbleClickCount
+  setBubbleClickCount,
+  miscklicksEnabled
 }) {
   const [bubbleStyle, setBubbleStyle] = useState(null);
 
@@ -51,8 +55,11 @@ export default function Bubble({
       top: `${top}px`,
       left: `${left}px`
     });
+
+    clearTimeout(BUBBLE_TIMEOUT);
+    BUBBLE_TIMEOUT = setTimeout(calculateBubbleStyle, 1000);
   }
-  useEffect(calculateBubbleStyle, [bubbleClickCount]);
+  useEffect(calculateBubbleStyle, [bubbleClickCount]); // eslint-disable-line
 
   useEffect(() => {
     function onWindowResize() {
@@ -60,10 +67,26 @@ export default function Bubble({
     }
     window.addEventListener('resize', onWindowResize);
 
+    function onWindowClick(evt) {
+      if (evt.target.id !== BUBBLE_ID) {
+        calculateBubbleStyle();
+      }
+    }
+
+    if (miscklicksEnabled) {
+      window.addEventListener('click', onWindowClick);
+    }
+
     return () => {
       window.removeEventListener('resize', onWindowResize);
+
+      if (miscklicksEnabled) {
+        window.removeEventListener('click', onWindowClick);
+      }
+
+      if (BUBBLE_TIMEOUT) clearTimeout(BUBBLE_TIMEOUT);
     };
-  });
+  }, []); // eslint-disable-line
 
   function onBubbleClick() {
     playAudio();
@@ -74,5 +97,5 @@ export default function Bubble({
     AUDIO.play();
   }
 
-  return <div id="bubble" style={bubbleStyle} onClick={onBubbleClick}></div>;
+  return <div id={BUBBLE_ID} style={bubbleStyle} onClick={onBubbleClick}></div>;
 }

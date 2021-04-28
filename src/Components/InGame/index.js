@@ -9,7 +9,8 @@ export default function InGame({
   setBubbleClickCount,
   setTimerInput,
   setGameInProgress,
-  setMessage
+  setMessage,
+  miscklicksEnabled
 }) {
   useEffect(() => {
     const interval = setInterval(() => {
@@ -25,7 +26,7 @@ export default function InGame({
       setTimerInput(DEFAULT_TIMER_INPUT);
       clearInterval(interval);
     }, timerInput * 1000);
-  }, []);
+  }, []); // eslint-disable-line
 
   return (
     <>
@@ -33,6 +34,7 @@ export default function InGame({
       <Bubble
         bubbleClickCount={bubbleClickCount}
         setBubbleClickCount={setBubbleClickCount}
+        miscklicksEnabled={miscklicksEnabled}
       />
     </>
   );

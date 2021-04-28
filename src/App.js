@@ -1,10 +1,4 @@
-import {
-  CircularProgress,
-  Container,
-  makeStyles,
-  Paper,
-  ThemeProvider
-} from '@material-ui/core';
+import { CircularProgress, ThemeProvider } from '@material-ui/core';
 import React, { lazy, Suspense, useEffect, useState } from 'react';
 import './index.css';
 import themes from './themes';
@@ -37,7 +31,7 @@ function App() {
     } else {
       setScore(bubbleClickCount);
     }
-  }, [gameInProgress]);
+  }, [gameInProgress]); // eslint-disable-line
 
   useEffect(() => {
     function getTotalClickCount() {
@@ -51,7 +45,7 @@ function App() {
         window.removeEventListener('click', getTotalClickCount);
       };
     }
-  });
+  }, [miscklicksEnabled, gameInProgress]);
 
   function handleButtonClick() {
     setBubbleClickCount(0);
@@ -77,6 +71,7 @@ function App() {
             setTimerInput={setTimerInput}
             setGameInProgress={setGameInProgress}
             setMessage={setMessage}
+            miscklicksEnabled={miscklicksEnabled}
           />
         </Suspense>
       ) : (
