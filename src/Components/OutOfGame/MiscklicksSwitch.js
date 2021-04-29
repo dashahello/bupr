@@ -1,4 +1,4 @@
-import { Divider, FormControlLabel, Switch } from '@material-ui/core';
+import { FormControlLabel, Switch } from '@material-ui/core';
 
 export default function MiscklicksSwitch({
   setMiscklicksEnabled,
@@ -6,7 +6,6 @@ export default function MiscklicksSwitch({
 }) {
   return (
     <>
-      <Divider />
       <FormControlLabel
         control={
           <Switch
@@ -19,7 +18,6 @@ export default function MiscklicksSwitch({
         }
         label="Miscklicks enabled"
       />
-      <Divider style={{ marginBottom: 8 }} />
     </>
   );
 }

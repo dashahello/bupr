@@ -25,7 +25,6 @@ export default function ThemeSwitch({ themeToUse, setThemeToUse }) {
         }
         label="Dark theme"
       />
-      <Divider />
     </>
   );
 }

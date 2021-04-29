@@ -5,6 +5,7 @@ export default function DisplayScore({ bubbleClickCount, score }) {
     <>
       <Divider />
       <Typography variant="h4">{`YOUR SCORE: ${score}`}</Typography>
+      <Divider style={{ marginBottom: 10 }} />
     </>
   ) : null;
 }

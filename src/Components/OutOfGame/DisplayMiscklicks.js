@@ -6,9 +6,4 @@ export default function DisplayMiscklicks({ miscklicksEnabled, miscklicks }) {
   } else {
     return null;
   }
-
-  // miscklicksEnabled ? (
-  //   <Typography variant="h5">{`Misclicks: ${miscklicks}`}</Typography>
-  // ) : null;
 }
-// miscklicksEnabled &&

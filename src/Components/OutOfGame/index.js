@@ -9,9 +9,10 @@ import DisplayScore from './DisplayScore';
 import DisplayTitle from './DisplayTitle';
 import MiscklicksSwitch from './MiscklicksSwitch';
 import StartButton from './StartButton';
-import ThemeSwitch from './ThemeSwitch';
 import WaveDemo from './WaveDemo';
 import DisplayInstructions from './DisplayInstructions';
+
+import GameSettings from './GameSettigs';
 
 const useStyles = makeStyles((theme) => ({
   main: {
@@ -66,7 +67,8 @@ export default function OutOfGame({
       <Paper className={classes.main}>
         <DisplayTitle />
         <DisplayInstructions />
-        <ThemeSwitch setThemeToUse={setThemeToUse} themeToUse={themeToUse} />
+        {/* <ThemeSwitch setThemeToUse={setThemeToUse} themeToUse={themeToUse} /> */}
+        <GameSettings themeToUse={themeToUse} setThemeToUse={setThemeToUse} />
         <DisplayResultMessage
           message={message}
           setMessage={setMessage}
@@ -78,10 +80,10 @@ export default function OutOfGame({
           miscklicksEnabled={miscklicksEnabled}
           miscklicks={miscklicks}
         />
-        <MiscklicksSwitch
+        {/* <MiscklicksSwitch
           setMiscklicksEnabled={setMiscklicksEnabled}
           miscklicksEnabled={miscklicksEnabled}
-        />
+        /> */}
         <CustomTimer setTimerInput={setTimerInput} timerInput={timerInput} />
         <StartButton handleButtonClick={handleButtonClick} />
       </Paper>

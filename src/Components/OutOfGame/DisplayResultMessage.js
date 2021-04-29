@@ -1,4 +1,4 @@
-import { Divider, Typography } from '@material-ui/core';
+import { Typography } from '@material-ui/core';
 import { useEffect, useState } from 'react';
 
 export default function DisplayResultMessage({
@@ -10,10 +10,9 @@ export default function DisplayResultMessage({
 
   useEffect(() => {
     setMessage(score > timerInput ? 'GOOD JOB!' : 'YOU CAN DO BETTER');
-  }, [score, gameInProgress]);
+  }, [score, gameInProgress]); //eslint-disable-line
   return (
     <>
-      <Divider />
       <Typography>{score !== null ? message : null}</Typography>
     </>
   );

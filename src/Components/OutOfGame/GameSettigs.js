@@ -5,6 +5,8 @@ import AccordionSummary from '@material-ui/core/AccordionSummary';
 import AccordionDetails from '@material-ui/core/AccordionDetails';
 import Typography from '@material-ui/core/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import ThemeSwitch from './ThemeSwitch';
+import MiscklicksSwitch from './MiscklicksSwitch';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -17,7 +19,12 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-export default function DisplayInstructions() {
+export default function GameSettings({
+  themeToUse,
+  setThemeToUse,
+  miscklicksEnabled,
+  miscklicks
+}) {
   const classes = useStyles();
 
   return (
@@ -28,15 +35,16 @@ export default function DisplayInstructions() {
           aria-controls="panel1a-content"
           id="panel1a-header"
         >
-          <Typography className={classes.heading}>Instructions</Typography>
+          <Typography className={classes.heading}>Settings</Typography>
         </AccordionSummary>
         <AccordionDetails>
-          <Typography>
-            Set up the timer below, press "START THE GAME" and try to pop as
-            many bubbles as possible (remember that every bubble has a lifetime
-            of 1 second so it will disappear unless you click on it). Good luck
-            :)
-          </Typography>
+          {/* <Typography>Appearance</Typography> */}
+          {/* <Divider /> */}
+          <ThemeSwitch setThemeToUse={setThemeToUse} themeToUse={themeToUse} />
+          <MiscklicksSwitch
+            miscklicksEnabled={miscklicksEnabled}
+            miscklicks={miscklicks}
+          />
         </AccordionDetails>
       </Accordion>
     </div>
