@@ -7,7 +7,6 @@ import DisplayResultMessage from './DisplayResultMessage';
 import DisplayMiscklicks from './DisplayMiscklicks';
 import DisplayScore from './DisplayScore';
 import DisplayTitle from './DisplayTitle';
-import MiscklicksSwitch from './MiscklicksSwitch';
 import StartButton from './StartButton';
 import WaveDemo from './WaveDemo';
 import DisplayInstructions from './DisplayInstructions';
@@ -32,7 +31,6 @@ export default function OutOfGame({
   message,
   miscklicksEnabled,
   miscklicks,
-  setMiscklicksEnabled,
   setTimerInput,
   timerInput,
   handleButtonClick,
@@ -67,7 +65,6 @@ export default function OutOfGame({
       <Paper className={classes.main}>
         <DisplayTitle />
         <DisplayInstructions />
-        {/* <ThemeSwitch setThemeToUse={setThemeToUse} themeToUse={themeToUse} /> */}
         <GameSettings themeToUse={themeToUse} setThemeToUse={setThemeToUse} />
         <DisplayResultMessage
           message={message}
@@ -80,10 +77,6 @@ export default function OutOfGame({
           miscklicksEnabled={miscklicksEnabled}
           miscklicks={miscklicks}
         />
-        {/* <MiscklicksSwitch
-          setMiscklicksEnabled={setMiscklicksEnabled}
-          miscklicksEnabled={miscklicksEnabled}
-        /> */}
         <CustomTimer setTimerInput={setTimerInput} timerInput={timerInput} />
         <StartButton handleButtonClick={handleButtonClick} />
       </Paper>

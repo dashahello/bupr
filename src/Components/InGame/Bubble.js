@@ -5,7 +5,6 @@ import randomRgbString from '../../helpers/randomRgbString';
 
 const BUBBLE_HOVER_SCALE = 1.1;
 
-// const AUDIO = document.getElementById('bubble_pop_sound');
 const AUDIO = new Audio(audio);
 
 const BUBBLE_ID = 'bubble';

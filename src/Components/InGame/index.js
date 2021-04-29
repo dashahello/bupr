@@ -19,10 +19,7 @@ export default function InGame({
     }, 1000);
 
     setTimeout(() => {
-      // console.log('timer input', timerInput);
-      // console.log('score', score);
       setGameInProgress(false);
-      // setMessage(score > timerInput ? 'GOOD JOB!' : 'YOU CAN DO BETTER');
 
       setTimerInput(DEFAULT_TIMER_INPUT);
       clearInterval(interval);

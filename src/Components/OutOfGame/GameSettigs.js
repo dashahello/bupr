@@ -38,8 +38,6 @@ export default function GameSettings({
           <Typography className={classes.heading}>Settings</Typography>
         </AccordionSummary>
         <AccordionDetails>
-          {/* <Typography>Appearance</Typography> */}
-          {/* <Divider /> */}
           <ThemeSwitch setThemeToUse={setThemeToUse} themeToUse={themeToUse} />
           <MiscklicksSwitch
             miscklicksEnabled={miscklicksEnabled}
