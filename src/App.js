@@ -13,13 +13,10 @@ const InGame = lazy(() => import('./Components/InGame'));
 function App() {
   const [bubbleClickCount, setBubbleClickCount] = useState(null);
   const [totalClickCount, setTotalClickCount] = useState(0);
-  const [score, setScore] = useState(0);
+  const [score, setScore] = useState(null);
   const [miscklicks, setMiscklicks] = useState(null);
 
   const [gameInProgress, setGameInProgress] = useState(false);
-  const [message, setMessage] = useState(
-    'Set up the timer below, press "START THE GAME" and try to pop as many bubbles as possible (remember that every bubble has a lifetime of 1 second so it will disappear unless you click on it). Good luck :)'
-  );
 
   const [timerInput, setTimerInput] = useState(DEFAULT_TIMER_INPUT);
   const [miscklicksEnabled, setMiscklicksEnabled] = useState(false);
@@ -70,8 +67,8 @@ function App() {
             setBubbleClickCount={setBubbleClickCount}
             setTimerInput={setTimerInput}
             setGameInProgress={setGameInProgress}
-            setMessage={setMessage}
             miscklicksEnabled={miscklicksEnabled}
+            score={score}
           />
         </Suspense>
       ) : (
@@ -81,7 +78,6 @@ function App() {
             score={score}
             themeToUse={themeToUse}
             setThemeToUse={setThemeToUse}
-            message={message}
             miscklicksEnabled={miscklicksEnabled}
             miscklicks={miscklicks}
             setMiscklicksEnabled={setMiscklicksEnabled}

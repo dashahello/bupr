@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import randomNumberBetween from '../../helpers/randomNumberBetween';
 import randomRgbString from '../../helpers/randomRgbString';
 import CustomTimer from './CustomTimer';
-import DisplayMessage from './DisplayMessage';
+import DisplayResultMessage from './DisplayResultMessage';
 import DisplayMiscklicks from './DisplayMiscklicks';
 import DisplayScore from './DisplayScore';
 import DisplayTitle from './DisplayTitle';
@@ -33,7 +33,8 @@ export default function OutOfGame({
   setMiscklicksEnabled,
   setTimerInput,
   timerInput,
-  handleButtonClick
+  handleButtonClick,
+  setMessage
 }) {
   const classes = useStyles();
 
@@ -64,7 +65,12 @@ export default function OutOfGame({
       <Paper className={classes.main}>
         <DisplayTitle />
         <ThemeSwitch themeToUse={themeToUse} setThemeToUse={setThemeToUse} />
-        <DisplayMessage message={message} />
+        <DisplayResultMessage
+          message={message}
+          setMessage={setMessage}
+          score={score}
+          timerInput={timerInput}
+        />
         <DisplayScore bubbleClickCount={bubbleClickCount} score={score} />
         <DisplayMiscklicks
           miscklicksEnabled={miscklicksEnabled}

@@ -10,7 +10,8 @@ export default function InGame({
   setTimerInput,
   setGameInProgress,
   setMessage,
-  miscklicksEnabled
+  miscklicksEnabled,
+  score
 }) {
   useEffect(() => {
     const interval = setInterval(() => {
@@ -18,10 +19,10 @@ export default function InGame({
     }, 1000);
 
     setTimeout(() => {
+      // console.log('timer input', timerInput);
+      // console.log('score', score);
       setGameInProgress(false);
-      setMessage(
-        bubbleClickCount > timerInput ? 'GOOD JOB!' : 'YOU CAN DO BETTER'
-      );
+      // setMessage(score > timerInput ? 'GOOD JOB!' : 'YOU CAN DO BETTER');
 
       setTimerInput(DEFAULT_TIMER_INPUT);
       clearInterval(interval);
@@ -35,6 +36,7 @@ export default function InGame({
         bubbleClickCount={bubbleClickCount}
         setBubbleClickCount={setBubbleClickCount}
         miscklicksEnabled={miscklicksEnabled}
+        score={score}
       />
     </>
   );
