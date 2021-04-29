@@ -1,4 +1,4 @@
-import audio from './../../assets/audio.wav';
+import audio from './../../assets/audio.mp3';
 import { useEffect, useState } from 'react';
 import randomNumberBetween from '../../helpers/randomNumberBetween';
 import randomRgbString from '../../helpers/randomRgbString';
