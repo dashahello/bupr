@@ -1,4 +1,4 @@
-import { Typography } from '@material-ui/core';
+import { Divider, Typography } from '@material-ui/core';
 import { useEffect, useState } from 'react';
 
 export default function DisplayResultMessage({
@@ -11,5 +11,10 @@ export default function DisplayResultMessage({
   useEffect(() => {
     setMessage(score > timerInput ? 'GOOD JOB!' : 'YOU CAN DO BETTER');
   }, [score, gameInProgress]);
-  return <Typography>{score !== null ? message : null}</Typography>;
+  return (
+    <>
+      <Divider />
+      <Typography>{score !== null ? message : null}</Typography>
+    </>
+  );
 }

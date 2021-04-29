@@ -11,6 +11,7 @@ import MiscklicksSwitch from './MiscklicksSwitch';
 import StartButton from './StartButton';
 import ThemeSwitch from './ThemeSwitch';
 import WaveDemo from './WaveDemo';
+import DisplayInstructions from './DisplayInstructions';
 
 const useStyles = makeStyles((theme) => ({
   main: {
@@ -64,7 +65,8 @@ export default function OutOfGame({
 
       <Paper className={classes.main}>
         <DisplayTitle />
-        <ThemeSwitch themeToUse={themeToUse} setThemeToUse={setThemeToUse} />
+        <DisplayInstructions />
+        <ThemeSwitch setThemeToUse={setThemeToUse} themeToUse={themeToUse} />
         <DisplayResultMessage
           message={message}
           setMessage={setMessage}
