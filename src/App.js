@@ -1,12 +1,11 @@
 import { CircularProgress, ThemeProvider } from '@material-ui/core';
 import React, { lazy, Suspense, useEffect, useState } from 'react';
+
 import './index.css';
 import themes from './themes';
-//
-// import InGame from './Components/InGame';
 import OutOfGame from './Components/OutOfGame';
 import DEFAULT_TIMER_INPUT from './DEFAULT_TIMER_INPUT';
-//
+
 
 const InGame = lazy(() => import('./Components/InGame'));
 
