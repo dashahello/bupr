@@ -17,6 +17,11 @@ export default function Bubble({
 }) {
   const [bubbleStyle, setBubbleStyle] = useState(null);
 
+  let color;
+  let size;
+  let top;
+  let left;
+
   function calculateBubbleStyle() {
     const onePercentOfAverageScreenDimension =
       (window.innerWidth + window.innerHeight) / 2 / 100;
@@ -28,8 +33,8 @@ export default function Bubble({
     const minBubbleSize = onePercentOfAverageScreenDimension * 5;
     const maxBubbleSize = onePercentOfAverageScreenDimension * 25;
 
-    const color = randomRgbString(250);
-    let size = randomNumberBetween(minBubbleSize, maxBubbleSize);
+    color = randomRgbString(250);
+    size = randomNumberBetween(minBubbleSize, maxBubbleSize);
 
     if (size * 2 > smallestScreenDimension) {
       size = smallestScreenDimension / 2;
@@ -37,16 +42,19 @@ export default function Bubble({
 
     const maxBubbleGrowth = (size * BUBBLE_HOVER_SCALE - size) / 2;
 
-    const top = randomNumberBetween(
+    top = randomNumberBetween(
       maxBubbleGrowth,
       window.innerHeight - size - maxBubbleGrowth
     );
 
-    const left = randomNumberBetween(
+    left = randomNumberBetween(
       maxBubbleGrowth,
       window.innerWidth - size - maxBubbleGrowth
     );
+  }
 
+  function changeBubbleStyle() {
+    calculateBubbleStyle();
     setBubbleStyle({
       background: `${color}`,
       width: `${size}px`,
@@ -56,19 +64,20 @@ export default function Bubble({
     });
 
     clearTimeout(BUBBLE_TIMEOUT);
-    BUBBLE_TIMEOUT = setTimeout(calculateBubbleStyle, 1000);
+    BUBBLE_TIMEOUT = setTimeout(changeBubbleStyle, 1000);
   }
-  useEffect(calculateBubbleStyle, [bubbleClickCount]); // eslint-disable-line
+
+  useEffect(changeBubbleStyle, [bubbleClickCount]); // eslint-disable-line
 
   useEffect(() => {
     function onWindowResize() {
-      calculateBubbleStyle();
+      changeBubbleStyle();
     }
     window.addEventListener('resize', onWindowResize);
 
     function onWindowClick(evt) {
       if (evt.target.id !== BUBBLE_ID) {
-        calculateBubbleStyle();
+        changeBubbleStyle();
       }
     }
 
