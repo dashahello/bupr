@@ -23,7 +23,7 @@ export default function GameSettings({
   themeToUse,
   setThemeToUse,
   miscklicksEnabled,
-  miscklicks
+  setMiscklicksEnabled
 }) {
   const classes = useStyles();
 
@@ -41,7 +41,7 @@ export default function GameSettings({
           <ThemeSwitch setThemeToUse={setThemeToUse} themeToUse={themeToUse} />
           <MiscklicksSwitch
             miscklicksEnabled={miscklicksEnabled}
-            miscklicks={miscklicks}
+            setMiscklicksEnabled={setMiscklicksEnabled}
           />
         </AccordionDetails>
       </Accordion>

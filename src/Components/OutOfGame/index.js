@@ -34,7 +34,8 @@ export default function OutOfGame({
   setTimerInput,
   timerInput,
   handleButtonClick,
-  setMessage
+  setMessage,
+  setMiscklicksEnabled
 }) {
   const classes = useStyles();
 
@@ -65,7 +66,12 @@ export default function OutOfGame({
       <Paper className={classes.main}>
         <DisplayTitle />
         <DisplayInstructions />
-        <GameSettings themeToUse={themeToUse} setThemeToUse={setThemeToUse} />
+        <GameSettings
+          themeToUse={themeToUse}
+          setThemeToUse={setThemeToUse}
+          setMiscklicksEnabled={setMiscklicksEnabled}
+          miscklicksEnabled={miscklicksEnabled}
+        />
         <DisplayResultMessage
           message={message}
           setMessage={setMessage}
