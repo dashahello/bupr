@@ -35,7 +35,9 @@ export default function OutOfGame({
   timerInput,
   handleButtonClick,
   setMessage,
-  setMiscklicksEnabled
+  setMiscklicksEnabled,
+  bubbleLifetime,
+  setBubbleLifetime
 }) {
   const classes = useStyles();
 
@@ -71,6 +73,8 @@ export default function OutOfGame({
           setThemeToUse={setThemeToUse}
           setMiscklicksEnabled={setMiscklicksEnabled}
           miscklicksEnabled={miscklicksEnabled}
+          bubbleLifetime={bubbleLifetime}
+          setBubbleLifetime={setBubbleLifetime}
         />
         <DisplayResultMessage
           message={message}

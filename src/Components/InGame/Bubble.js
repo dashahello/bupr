@@ -13,7 +13,8 @@ let BUBBLE_TIMEOUT;
 export default function Bubble({
   bubbleClickCount,
   setBubbleClickCount,
-  miscklicksEnabled
+  miscklicksEnabled,
+  bubbleLifetime
 }) {
   const [bubbleStyle, setBubbleStyle] = useState(null);
 
@@ -63,8 +64,10 @@ export default function Bubble({
       left: `${left}px`
     });
 
-    clearTimeout(BUBBLE_TIMEOUT);
-    BUBBLE_TIMEOUT = setTimeout(changeBubbleStyle, 1000);
+    if (bubbleLifetime) {
+      clearTimeout(BUBBLE_TIMEOUT);
+      BUBBLE_TIMEOUT = setTimeout(changeBubbleStyle, 1000);
+    }
   }
 
   useEffect(changeBubbleStyle, [bubbleClickCount]); // eslint-disable-line

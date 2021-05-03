@@ -7,6 +7,7 @@ import Typography from '@material-ui/core/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import ThemeSwitch from './ThemeSwitch';
 import MiscklicksSwitch from './MiscklicksSwitch';
+import BubbleLifetimeSwitch from './BubbleLifetimeSwitch';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -23,7 +24,9 @@ export default function GameSettings({
   themeToUse,
   setThemeToUse,
   miscklicksEnabled,
-  setMiscklicksEnabled
+  setMiscklicksEnabled,
+  bubbleLifetime,
+  setBubbleLifetime
 }) {
   const classes = useStyles();
 
@@ -42,6 +45,10 @@ export default function GameSettings({
           <MiscklicksSwitch
             miscklicksEnabled={miscklicksEnabled}
             setMiscklicksEnabled={setMiscklicksEnabled}
+          />
+          <BubbleLifetimeSwitch
+            bubbleLifetime={bubbleLifetime}
+            setBubbleLifetime={setBubbleLifetime}
           />
         </AccordionDetails>
       </Accordion>

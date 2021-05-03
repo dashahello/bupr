@@ -11,7 +11,8 @@ export default function InGame({
   setGameInProgress,
   setMessage,
   miscklicksEnabled,
-  score
+  score,
+  bubbleLifetime
 }) {
   useEffect(() => {
     const interval = setInterval(() => {
@@ -34,6 +35,7 @@ export default function InGame({
         setBubbleClickCount={setBubbleClickCount}
         miscklicksEnabled={miscklicksEnabled}
         score={score}
+        bubbleLifetime={bubbleLifetime}
       />
     </>
   );

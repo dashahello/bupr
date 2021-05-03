@@ -6,7 +6,6 @@ import themes from './themes';
 import OutOfGame from './Components/OutOfGame';
 import DEFAULT_TIMER_INPUT from './DEFAULT_TIMER_INPUT';
 
-
 const InGame = lazy(() => import('./Components/InGame'));
 
 function App() {
@@ -19,6 +18,7 @@ function App() {
 
   const [timerInput, setTimerInput] = useState(DEFAULT_TIMER_INPUT);
   const [miscklicksEnabled, setMiscklicksEnabled] = useState(false);
+  const [bubbleLifetime, setBubbleLifetime] = useState(false);
 
   useEffect(() => {
     if (miscklicksEnabled) {
@@ -68,6 +68,8 @@ function App() {
             setGameInProgress={setGameInProgress}
             miscklicksEnabled={miscklicksEnabled}
             score={score}
+            bubbleLifetime={bubbleLifetime}
+            setBubbleLifetime={setBubbleLifetime}
           />
         </Suspense>
       ) : (
@@ -83,6 +85,8 @@ function App() {
             setTimerInput={setTimerInput}
             timerInput={timerInput}
             handleButtonClick={handleButtonClick}
+            bubbleLifetime={bubbleLifetime}
+            setBubbleLifetime={setBubbleLifetime}
           />
         </>
       )}
