@@ -57,7 +57,6 @@ export default function Bubble({
   function changeBubbleStyle() {
     calculateBubbleStyle();
     setBubbleStyle({
-      // background: `${color}`,
       background: `linear-gradient(
         to bottom, 
         rgba(254,255,255) 0%,
