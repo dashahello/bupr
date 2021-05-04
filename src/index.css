@@ -1,4 +1,5 @@
 body {
+  background-image: url('./assets/sky_and_stars.jpg');
   margin: 0;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -17,6 +18,7 @@ code {
   transition: transform 0.25s, top 0.05s,
     left 0.05s cubic-bezier(0.075, 0.82, 0.165, 1);
   box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.1);
+  /* opacity: 0.9; */
 }
 
 #bubble:hover {
