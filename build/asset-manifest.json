@@ -1,8 +1,8 @@
 {
   "files": {
-    "main.css": "/bupr/build/static/css/main.17493d1e.chunk.css",
-    "main.js": "/bupr/build/static/js/main.b58f0cba.chunk.js",
-    "main.js.map": "/bupr/build/static/js/main.b58f0cba.chunk.js.map",
+    "main.css": "/bupr/build/static/css/main.e5f632ae.chunk.css",
+    "main.js": "/bupr/build/static/js/main.065ac518.chunk.js",
+    "main.js.map": "/bupr/build/static/js/main.065ac518.chunk.js.map",
     "runtime-main.js": "/bupr/build/static/js/runtime-main.a44b7dbf.js",
     "runtime-main.js.map": "/bupr/build/static/js/runtime-main.a44b7dbf.js.map",
     "static/js/2.3bc9fde2.chunk.js": "/bupr/build/static/js/2.3bc9fde2.chunk.js",
@@ -12,14 +12,15 @@
     "index.html": "/bupr/build/index.html",
     "service-worker.js": "/bupr/build/service-worker.js",
     "service-worker.js.map": "/bupr/build/service-worker.js.map",
-    "static/css/main.17493d1e.chunk.css.map": "/bupr/build/static/css/main.17493d1e.chunk.css.map",
+    "static/css/main.e5f632ae.chunk.css.map": "/bupr/build/static/css/main.e5f632ae.chunk.css.map",
     "static/js/2.3bc9fde2.chunk.js.LICENSE.txt": "/bupr/build/static/js/2.3bc9fde2.chunk.js.LICENSE.txt",
-    "static/media/audio.80f01a1b.mp3": "/bupr/build/static/media/audio.80f01a1b.mp3"
+    "static/media/audio.80f01a1b.mp3": "/bupr/build/static/media/audio.80f01a1b.mp3",
+    "static/media/index.css": "/bupr/build/static/media/sky_and_stars.d389df0b.jpg"
   },
   "entrypoints": [
     "static/js/runtime-main.a44b7dbf.js",
     "static/js/2.3bc9fde2.chunk.js",
-    "static/css/main.17493d1e.chunk.css",
-    "static/js/main.b58f0cba.chunk.js"
+    "static/css/main.e5f632ae.chunk.css",
+    "static/js/main.065ac518.chunk.js"
   ]
 }
