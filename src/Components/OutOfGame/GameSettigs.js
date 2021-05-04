@@ -20,6 +20,8 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
+// <3
+
 export default function GameSettings({
   themeToUse,
   setThemeToUse,
