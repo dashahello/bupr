@@ -1,5 +1,4 @@
 import { FormControlLabel, Switch } from '@material-ui/core';
-import { useState } from 'react';
 
 export default function BubbleLifetimeSwitch({
   bubbleLifetime,

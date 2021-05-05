@@ -5,7 +5,6 @@ import './index.css';
 import themes from './themes';
 import OutOfGame from './Components/OutOfGame';
 import DEFAULT_TIMER_INPUT from './DEFAULT_TIMER_INPUT';
-import background from './assets/sky_and_stars.jpg';
 
 const InGame = lazy(() => import('./Components/InGame'));
 
@@ -51,8 +50,6 @@ function App() {
     setGameInProgress(true);
   }
 
-  // const isTablet = useIsTablet();
-
   const [themeToUse, setThemeToUse] = useState(
     localStorage.getItem('themeToUse')
   );
@@ -96,5 +93,3 @@ function App() {
 }
 
 export default App;
-
-// <div style={{ backgroundImage: `url(${background})` }}>
