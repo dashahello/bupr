@@ -1,4 +1,4 @@
-import { Container, makeStyles, Paper } from '@material-ui/core';
+import { Container, Divider, makeStyles, Paper } from '@material-ui/core';
 import { useEffect, useState } from 'react';
 import randomNumberBetween from '../../helpers/randomNumberBetween';
 import randomRgbString from '../../helpers/randomRgbString';
@@ -12,6 +12,7 @@ import WaveDemo from './WaveDemo';
 import DisplayInstructions from './DisplayInstructions';
 
 import GameSettings from './GameSettigs';
+import Username from './Username';
 
 const useStyles = makeStyles((theme) => ({
   main: {
@@ -37,7 +38,9 @@ export default function OutOfGame({
   setMessage,
   setMiscklicksEnabled,
   bubbleLifetime,
-  setBubbleLifetime
+  setBubbleLifetime,
+  username,
+  setUsername
 }) {
   const classes = useStyles();
 
@@ -87,6 +90,7 @@ export default function OutOfGame({
           miscklicksEnabled={miscklicksEnabled}
           miscklicks={miscklicks}
         />
+        <Username username={username} setUsername={setUsername} />
         <CustomTimer setTimerInput={setTimerInput} timerInput={timerInput} />
         <StartButton handleButtonClick={handleButtonClick} />
       </Paper>
