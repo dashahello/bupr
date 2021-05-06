@@ -1,10 +1,10 @@
 import { Container, Paper, Typography } from '@material-ui/core';
 
-export default function RemainingTime({ timerInput, username }) {
+export default function RemainingTime({ timerInput }) {
   return (
     <Container maxWidth="xs">
       <Paper>
-        <Typography>{`${username} your remaining time:
+        <Typography>{`your remaining time:
          ${timerInput}`}</Typography>
       </Paper>
     </Container>
