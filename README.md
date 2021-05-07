@@ -1,6 +1,6 @@
-# Getting Started with Create React App
+# Epic BUPR game with React
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+[Play now!](dashahello.github.io/bupr/build/)
 
 ## Available Scripts
 
