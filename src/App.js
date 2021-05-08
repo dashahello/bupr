@@ -19,6 +19,7 @@ function App() {
   const [timerInput, setTimerInput] = useState(DEFAULT_TIMER_INPUT);
   const [miscklicksEnabled, setMiscklicksEnabled] = useState(false);
   const [bubbleLifetime, setBubbleLifetime] = useState(false);
+  const [username, setUsername] = useState('User');
 
   useEffect(() => {
     if (miscklicksEnabled) {
@@ -48,6 +49,10 @@ function App() {
     setTotalClickCount(0);
     setMiscklicks(null);
     setGameInProgress(true);
+  }
+
+  function getUsername(evt) {
+    setUsername(evt.target.value);
   }
 
   const [themeToUse, setThemeToUse] = useState(

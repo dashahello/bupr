@@ -1,16 +1,10 @@
 import { TextField, Typography } from '@material-ui/core';
-import { useState } from 'react';
+//import { useState } from 'react';
 
-export default function Username() {
-  const [username, setUsername] = useState('User');
-
-  function getUsername(evt) {
-    setUsername(evt.target.value);
-  }
-
+export default function Username({ username, setUsername, getUsername }) {
   return (
     <>
-      {/* <Typography>{username}</Typography> */}
+      <Typography username={username}>{username}</Typography>
       <TextField
         style={{ marginBottom: '10px' }}
         type="text"
@@ -18,6 +12,7 @@ export default function Username() {
         variant="outlined"
         onChange={getUsername}
         placeholder="Randy Bobandy"
+        setUserName={setUsername}
       />
     </>
   );

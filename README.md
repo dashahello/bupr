@@ -1,6 +1,6 @@
 # Epic BUPR game with React
 
-[Play now!](dashahello.github.io/bupr/build/)
+[Play now!](https://dashahello.github.io/bupr/build/)
 
 ## Available Scripts
 
