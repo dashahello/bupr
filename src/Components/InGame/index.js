@@ -11,9 +11,7 @@ export default function InGame({
   setGameInProgress,
   miscklicksEnabled,
   score,
-  bubbleLifetime,
-  username,
-  setUsername
+  bubbleLifetime
 }) {
   useEffect(() => {
     const interval = setInterval(() => {
@@ -30,11 +28,7 @@ export default function InGame({
 
   return (
     <>
-      <RemainingTime
-        timerInput={timerInput}
-        username={username}
-        setUsername={setUsername}
-      />
+      <RemainingTime timerInput={timerInput} />
       <Bubble
         bubbleClickCount={bubbleClickCount}
         setBubbleClickCount={setBubbleClickCount}

@@ -1,4 +1,4 @@
-import { Container, Divider, makeStyles, Paper } from '@material-ui/core';
+import { Container, makeStyles, Paper } from '@material-ui/core';
 import { useEffect, useState } from 'react';
 import randomNumberBetween from '../../helpers/randomNumberBetween';
 import randomRgbString from '../../helpers/randomRgbString';
