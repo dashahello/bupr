@@ -4,7 +4,7 @@ export default function RemainingTime({ timerInput }) {
   return (
     <Container maxWidth="xs">
       <Paper>
-        <Typography>{` your remaining time:
+        <Typography>{`Remaining time:
          ${timerInput}`}</Typography>
       </Paper>
     </Container>

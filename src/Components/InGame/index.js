@@ -25,7 +25,7 @@ export default function InGame({
       clearInterval(interval);
     }, timerInput * 1000);
   }, []); // eslint-disable-line
-
+  // "eslint-disable-line" allows to disable rule warnings
   return (
     <>
       <RemainingTime timerInput={timerInput} />
