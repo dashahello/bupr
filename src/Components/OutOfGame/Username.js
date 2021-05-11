@@ -10,9 +10,9 @@ export default function Username({ username, setUsername, getUsername }) {
         type="text"
         label="Name"
         variant="outlined"
-        onChange={getUsername}
+        value={username}
+        onChange={(evt) => setUsername(evt.target.value)}
         placeholder="Randy Bobandy"
-        setUserName={setUsername}
       />
     </>
   );

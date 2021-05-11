@@ -51,10 +51,6 @@ function App() {
     setGameInProgress(true);
   }
 
-  function getUsername(evt) {
-    setUsername(evt.target.value);
-  }
-
   const [themeToUse, setThemeToUse] = useState(
     localStorage.getItem('themeToUse')
   );
@@ -90,6 +86,8 @@ function App() {
             handleButtonClick={handleButtonClick}
             bubbleLifetime={bubbleLifetime}
             setBubbleLifetime={setBubbleLifetime}
+            username={username}
+            setUsername={setUsername}
           />
         </>
       )}
