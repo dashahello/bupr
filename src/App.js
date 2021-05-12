@@ -69,6 +69,8 @@ function App() {
             score={score}
             bubbleLifetime={bubbleLifetime}
             setBubbleLifetime={setBubbleLifetime}
+            username={username}
+            setUsername={setUsername}
           />
         </Suspense>
       ) : (

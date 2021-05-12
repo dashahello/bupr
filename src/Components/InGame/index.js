@@ -11,7 +11,9 @@ export default function InGame({
   setGameInProgress,
   miscklicksEnabled,
   score,
-  bubbleLifetime
+  bubbleLifetime,
+  username,
+  setUsername
 }) {
   useEffect(() => {
     const interval = setInterval(() => {
@@ -28,7 +30,11 @@ export default function InGame({
   // "eslint-disable-line" allows to disable rule warnings
   return (
     <>
-      <RemainingTime timerInput={timerInput} />
+      <RemainingTime
+        timerInput={timerInput}
+        username={username}
+        setUsername={setUsername}
+      />
       <Bubble
         bubbleClickCount={bubbleClickCount}
         setBubbleClickCount={setBubbleClickCount}
