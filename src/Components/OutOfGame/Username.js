@@ -1,19 +1,22 @@
 import { TextField, Typography } from '@material-ui/core';
-//import { useState } from 'react';
 
-export default function Username({ username, setUsername, getUsername }) {
+export default function Username({ username, setUsername }) {
+  function handleChange(evt) {
+    setUsername(evt.target.value);
+    //localStorage.setItem('user', username);
+  }
   return (
     <>
-      <Typography username={username}>{username}</Typography>
       <TextField
         style={{ marginBottom: '10px' }}
         type="text"
         label="Name"
         variant="outlined"
         value={username}
-        onChange={(evt) => setUsername(evt.target.value)}
+        onChange={handleChange}
         placeholder="Randy Bobandy"
       />
     </>
   );
 }
+//(evt) => setUsername(evt.target.value)

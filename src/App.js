@@ -43,12 +43,13 @@ function App() {
       };
     }
   }, [miscklicksEnabled, gameInProgress]);
-
+  //local storage
   function handleButtonClick() {
     setBubbleClickCount(0);
     setTotalClickCount(0);
     setMiscklicks(null);
     setGameInProgress(true);
+    // console.log(username);
   }
 
   const [themeToUse, setThemeToUse] = useState(

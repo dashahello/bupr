@@ -30,11 +30,7 @@ export default function InGame({
   // "eslint-disable-line" allows to disable rule warnings
   return (
     <>
-      <RemainingTime
-        timerInput={timerInput}
-        username={username}
-        setUsername={setUsername}
-      />
+      <RemainingTime timerInput={timerInput} username={username} />
       <Bubble
         bubbleClickCount={bubbleClickCount}
         setBubbleClickCount={setBubbleClickCount}

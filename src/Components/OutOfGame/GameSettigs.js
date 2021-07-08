@@ -43,15 +43,20 @@ export default function GameSettings({
           <Typography className={classes.heading}>Settings</Typography>
         </AccordionSummary>
         <AccordionDetails>
-          <div style={{ display: 'flex', flexWrap: 'wrap' }}>
+          <div
+            className={classes.root}
+            style={{ display: 'flex', flexWrap: 'wrap' }}
+          >
             <ThemeSwitch
               setThemeToUse={setThemeToUse}
               themeToUse={themeToUse}
             />
+
             <MiscklicksSwitch
               miscklicksEnabled={miscklicksEnabled}
               setMiscklicksEnabled={setMiscklicksEnabled}
             />
+
             <BubbleLifetimeSwitch
               bubbleLifetime={bubbleLifetime}
               setBubbleLifetime={setBubbleLifetime}

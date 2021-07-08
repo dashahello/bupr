@@ -79,6 +79,7 @@ export default function OutOfGame({
           bubbleLifetime={bubbleLifetime}
           setBubbleLifetime={setBubbleLifetime}
         />
+
         <DisplayResultMessage
           message={message}
           setMessage={setMessage}
@@ -90,7 +91,10 @@ export default function OutOfGame({
           miscklicksEnabled={miscklicksEnabled}
           miscklicks={miscklicks}
         />
-        <Username username={username} setUsername={setUsername} />
+        {/* <Username username={username} setUsername={setUsername} />
+        <button onClick={() => localStorage.setItem('user', username)}>
+          yes!
+        </button> */}
         <CustomTimer setTimerInput={setTimerInput} timerInput={timerInput} />
         <StartButton handleButtonClick={handleButtonClick} />
       </Paper>
